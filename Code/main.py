@@ -3,6 +3,10 @@ import pygame
 import random
 import math
 
+import inspect
+
+DEBUG = 0
+
 pygame.font.init()
 pygame.display.set_caption("Acceleration Ball")
 
@@ -36,6 +40,9 @@ except:
     MENU = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "menu.png")), (WIDTH, HEIGHT))
 
 def main_menu():
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     WIN.blit(MENU, (0,0))
     option1 = MENU_FONT.render("Press 'SPACE' to play",1,BLACK)
     option2 = MENU_FONT.render("Press 'F' to quit",1,BLACK)
@@ -59,7 +66,11 @@ def main_menu():
             quit()
             pygame.quit()
 
+
 def create_display(bar1, ball, score, speed):
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     WIN.blit(BACKGROUND, (0,0))
     score = SCORE_FONT.render("Score: {}".format(score), 1, BLACK)
     net_speed = SCORE_FONT.render("Net Speed: {:.2f}".format(speed),1,BLACK)
@@ -70,6 +81,9 @@ def create_display(bar1, ball, score, speed):
     pygame.display.update()   
 
 def manage_movement(bar1):  
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     key_pressed = pygame.key.get_pressed()
 
     if key_pressed[pygame.K_RIGHT] and (bar1.x + BAR_WIDTH) <= WIDTH:
@@ -78,10 +92,16 @@ def manage_movement(bar1):
         bar1.x -= BASE_VEL
 
 def ball_movement(ball, x_distance, y_distance):
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     ball.x += x_distance
     ball.y += y_distance
 
 def starting_movement():
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     angles = [math.radians(60), math.radians(120), math.radians(150), math.radians(210), math.radians(330)]
     angle = random.choice(angles)
     x_distance = math.cos(angle) * BALL_VEL
@@ -89,6 +109,9 @@ def starting_movement():
     return x_distance, y_distance
 
 def changing_movement(ball, bar, score, x_distance, y_distance):
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     if ball.x + x_distance < (0) or (ball.x + BALL_WIDTH + x_distance) > (WIDTH):
         x_distance *= -1
     if ball.y + y_distance < (0):
@@ -103,11 +126,15 @@ def changing_movement(ball, bar, score, x_distance, y_distance):
     return x_distance, y_distance, score, speed
 
 def lose_condition(ball):
+    if DEBUG:
+        print(inspect.stack()[0][3])
 
     if (ball.y + BALL_HEIGHT) > HEIGHT:
         return True
 
 def end_screen(score,speed):
+    if DEBUG:
+        print(inspect.stack()[0][3])
 
     WIN.blit(WINNER_SCREEN, (0,0))
     score_screen = SCORE_FONT.render("Score: {}".format(score), 1, BLACK)
@@ -117,23 +144,12 @@ def end_screen(score,speed):
     WIN.blit(speed_screen, (WIDTH/2 - speed_screen.get_width()/2, 700))
     WIN.blit(options, (WIDTH/2 - options.get_width()/2 , 750))
     pygame.display.update()
-
-    run = True
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-                pygame.quit()
-        
-        key_pressed = pygame.key.get_pressed()
-
-        if key_pressed[pygame.K_SPACE]:
-            game_loop()
-        elif key_pressed[pygame.K_f]:
-            run = False
-            pygame.quit()
+    pygame.event.wait()
         
 def game_loop():
+    if DEBUG:
+        print(inspect.stack()[0][3])
+
     run = True
     clock = pygame.time.Clock()
 
@@ -158,11 +174,9 @@ def game_loop():
 
         if lose_condition(ball):
             break
-    
+
     end_screen(score, net_speed)
     
-    pygame.quit()
-
     
 
 # This method starts the entire game
