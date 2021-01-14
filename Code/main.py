@@ -22,11 +22,18 @@ BLACK = (0,0,0)
 BALL_WIDTH, BALL_HEIGHT = 22, 20
 BAR_WIDTH, BAR_HEIGHT = 150, 20
 
-BALL = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "ball.png")), (BALL_WIDTH, BALL_HEIGHT))
-BAR = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "bar.png")), (BAR_WIDTH, BAR_HEIGHT))
-BACKGROUND = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "background.png")), (WIDTH, HEIGHT))
-WINNER_SCREEN = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "winner.png")), (WIDTH, HEIGHT))
-MENU = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "menu.png")), (WIDTH, HEIGHT))
+try:
+    BALL = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "ball.png")), (BALL_WIDTH, BALL_HEIGHT))
+    BAR = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "bar.png")), (BAR_WIDTH, BAR_HEIGHT))
+    BACKGROUND = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "background.png")), (WIDTH, HEIGHT))
+    WINNER_SCREEN = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "winner.png")), (WIDTH, HEIGHT))
+    MENU = pygame.transform.scale(pygame.image.load(os.path.join("Assets", "menu.png")), (WIDTH, HEIGHT))
+except:
+    BALL = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "ball.png")), (BALL_WIDTH, BALL_HEIGHT))
+    BAR = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "bar.png")), (BAR_WIDTH, BAR_HEIGHT))
+    BACKGROUND = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "background.png")), (WIDTH, HEIGHT))
+    WINNER_SCREEN = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "winner.png")), (WIDTH, HEIGHT))
+    MENU = pygame.transform.scale(pygame.image.load(os.path.join("../Assets", "menu.png")), (WIDTH, HEIGHT))
 
 def main_menu():
     WIN.blit(MENU, (0,0))
