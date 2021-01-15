@@ -19,7 +19,7 @@ Acceleration ball is a game where you move the slider at the bottom of the scree
 
 ## How to Use
 
-Dowloand the code and assets. Open the main.py in an ide with python 3; run the file as is to begin the game.
+Dowloand the code and assets. The pygame module is needed so make sure it is installed. Open the main.py in an ide with python 3; run the file as is to begin the game.
 
 ---
 
